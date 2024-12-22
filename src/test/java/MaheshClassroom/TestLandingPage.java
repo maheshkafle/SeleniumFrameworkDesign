@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import MaheshClassroom.pageobjects.LandingPage;
+import MaheshClassroom.pageobjects.ProductCatalogue;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestLandingPage {
@@ -29,10 +30,11 @@ public class TestLandingPage {
 		landingPage.goTo();		
 		landingPage.loginApplication("kafledarkhorse@gmail.com", "@Nepal123");
 		
-		String productName = "IPHONE 13 PRO";
-		List<WebElement> products =  driver.findElements(By.cssSelector(".mb-3"));
-		
+		ProductCatalogue productCataloguePage = new ProductCatalogue(driver);
+		List<WebElement>products = productCataloguePage.getProductList();
+			
 		//Note: Loops through bunch of products and filters it on the basis of text of the product
+		String productName = "IPHONE 13 PRO";
 		WebElement prod = products.stream().filter(product-> 
 		product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
 		//Clicks on last button(i.e Add to cart) inside card-body 
