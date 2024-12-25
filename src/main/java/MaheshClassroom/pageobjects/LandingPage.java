@@ -1,6 +1,5 @@
 package MaheshClassroom.pageobjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,11 +29,13 @@ public class LandingPage
 	@FindBy(id="login")
 	WebElement submitBtn;
 	
-	public void loginApplication(String email, String password)
+	public ProductCatalogue loginApplication(String email, String password)
 	{
 		emailField.sendKeys(email);
 		passwordField.sendKeys(password);
 		submitBtn.click();
+		ProductCatalogue productCataloguePage = new ProductCatalogue(driver);
+		return productCataloguePage;
 	}
 	
 	public void goTo()
