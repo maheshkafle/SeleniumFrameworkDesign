@@ -28,12 +28,35 @@ public class ProductCatalogue extends Abstractcomponent
 	@FindBy(css=".mb-3")
 	List<WebElement> products;
 	
-	By productsBy = By.cssSelector(".mb-3");
+	@FindBy(css=".ng-animating")
+	WebElement spinner;
 	
+	By productsBy = By.cssSelector(".mb-3");
+	By addToCart= By.cssSelector(".card-body button:last-of-type"); 
+	By toastMessage= By.cssSelector(".toast-success");
+			
 	public List<WebElement> getProductList()
 	{
-		waitForELementToAppear(productsBy);
+		waitForElementToAppear(productsBy);
 		return products;
+	}
+	
+	public WebElement getProductByName(String productName)
+	{
+		//Note: Loops through bunch of products and filters it on the basis of text of the product
+		WebElement prod = getProductList().stream().filter(product-> 
+		product.findElement(By.cssSelector("b")).getText().equals(productName)).findFirst().orElse(null);
+		return prod;
+	}
+	
+	
+	public void addProductToCart(String productName)
+	{
+		WebElement prod = getProductByName(productName);
+		//Clicks on last button(i.e Add to cart) inside card-body 
+		prod.findElement(addToCart).click();
+		waitForElementToAppear(toastMessage);
+		waitForElementToDisappear(spinner);
 	}
 	
 }
