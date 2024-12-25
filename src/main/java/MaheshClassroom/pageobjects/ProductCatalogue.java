@@ -50,7 +50,7 @@ public class ProductCatalogue extends Abstractcomponent
 	}
 	
 	
-	public void addProductToCart(String productName)
+	public void addProductToCart(String productName) throws InterruptedException
 	{
 		WebElement prod = getProductByName(productName);
 		//Clicks on last button(i.e Add to cart) inside card-body 
