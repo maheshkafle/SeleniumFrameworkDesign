@@ -21,7 +21,6 @@ public class ProductCatalogue extends Abstractcomponent
 		//initialization
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
-		
 	}
 	
 	//List<WebElement> products =  driver.findElements(By.cssSelector(".mb-3"))
