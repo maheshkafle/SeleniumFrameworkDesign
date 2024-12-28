@@ -9,13 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeTest;
 
 import MaheshClassroom.pageobjects.LandingPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseTest 
 {
-	WebDriver driver;
+	public WebDriver driver;
+	public LandingPage landingPage;
 	
 	public WebDriver initializeDriver() throws IOException
 	{
@@ -52,10 +54,11 @@ public class BaseTest
 		return driver;
 	}
 	
+	@BeforeTest
 	public LandingPage launchApplication() throws IOException
 	{
 		driver = initializeDriver();
-		LandingPage landingPage = new LandingPage(driver);
+		landingPage = new LandingPage(driver);
 		landingPage.goTo();
 		return landingPage;	
 		
