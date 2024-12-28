@@ -5,7 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LandingPage 
+import MaheshClassroom.Abstractcomponents.Abstractcomponent;
+
+public class LandingPage extends Abstractcomponent
 {
 	
 	WebDriver driver;
@@ -13,6 +15,7 @@ public class LandingPage
 	public LandingPage(WebDriver driver)
 	{
 		//initialization
+		super(driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		
@@ -29,6 +32,9 @@ public class LandingPage
 	@FindBy(id="login")
 	WebElement submitBtn;
 	
+	@FindBy(css="[class*='flyInOut']")
+	WebElement errorMessage;
+	
 	public ProductCatalogue loginApplication(String email, String password)
 	{
 		emailField.sendKeys(email);
@@ -41,6 +47,12 @@ public class LandingPage
 	public void goTo()
 	{
 		driver.get("https://rahulshettyacademy.com/client");
+	}
+	
+	public String getErrorMessage()
+	{
+		waitForWebElementToAppear(errorMessage);
+		return errorMessage.getText();
 	}
 }
 

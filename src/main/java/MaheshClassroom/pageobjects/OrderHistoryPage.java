@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-public class OrderHistoryPage 
+import MaheshClassroom.Abstractcomponents.Abstractcomponent;
+
+public class OrderHistoryPage  extends Abstractcomponent
 {
 
 	WebDriver driver;
@@ -13,6 +15,7 @@ public class OrderHistoryPage
 	public OrderHistoryPage(WebDriver driver)
 	{
 		//initialization
+		super(driver);
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		
