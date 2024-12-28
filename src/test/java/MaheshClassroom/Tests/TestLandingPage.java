@@ -23,7 +23,6 @@ public class TestLandingPage extends BaseTest{
 	public void submitOrder() throws InterruptedException, IOException
 	{
 	
-		LandingPage landingPage = launchApplication();
 		ProductCatalogue productCataloguePage = landingPage.loginApplication("kafledarkhorse@gmail.com", "@Nepal123");
 		String productName = "IPHONE 13 PRO";
 		productCataloguePage.addProductToCart(productName);	
