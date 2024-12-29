@@ -11,7 +11,7 @@ import MaheshClassroom.pageobjects.OrderHistoryPage;
 import MaheshClassroom.pageobjects.PaymentPage;
 import MaheshClassroom.pageobjects.ProductCatalogue;
 
-public class ErrorValidations extends BaseTest
+public class ErrorValidationTest extends BaseTest
 {
 
 	@Test
@@ -20,6 +20,14 @@ public class ErrorValidations extends BaseTest
 	
 		ProductCatalogue productCataloguePage = landingPage.loginApplication("kafledarkhorse@gmail.com", "@wrongPassword");
 		Assert.assertEquals("Incorrect email or password.", landingPage.getErrorMessage());
+	}
+	
+	
+
+	@Test
+	public void productErrorValidation() throws InterruptedException, IOException
+	{
+		Assert.assertFalse(false);		
 	}
 	
 	
