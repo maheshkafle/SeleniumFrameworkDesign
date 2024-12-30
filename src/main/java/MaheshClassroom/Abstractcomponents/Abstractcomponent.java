@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import MaheshClassroom.pageobjects.CartPage;
+import MaheshClassroom.pageobjects.OrderHistoryPage;
 
 public class Abstractcomponent 
 {
@@ -17,6 +18,9 @@ public class Abstractcomponent
 	
 	@FindBy(css="[routerlink*='cart']")
 	WebElement cartButton;
+	
+	@FindBy(css="[routerlink*='myorders']")
+	WebElement orderButton;
 	
 	public Abstractcomponent(WebDriver driver) 
 	{
@@ -47,6 +51,13 @@ public class Abstractcomponent
 		cartButton.click();
 		CartPage cartPage = new CartPage(driver);
 		return cartPage;
+	}
+	
+	public OrderHistoryPage goToOrderPage()
+	{
+		orderButton.click();
+		OrderHistoryPage orderHistoryPage = new OrderHistoryPage(driver);
+		return orderHistoryPage;
 	}
 	
 }

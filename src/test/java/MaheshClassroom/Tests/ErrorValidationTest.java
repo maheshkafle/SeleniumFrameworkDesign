@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import MaheshClassroom.TestComponents.BaseTest;
 import MaheshClassroom.pageobjects.CartPage;
-import MaheshClassroom.pageobjects.OrderHistoryPage;
+import MaheshClassroom.pageobjects.OrderConfirmationPage;
 import MaheshClassroom.pageobjects.PaymentPage;
 import MaheshClassroom.pageobjects.ProductCatalogue;
 

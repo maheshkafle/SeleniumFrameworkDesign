@@ -34,11 +34,11 @@ public class PaymentPage extends Abstractcomponent
 	
 	By searchList = By.cssSelector(".ta-results");
 	
-	public OrderHistoryPage gotoOrderHistoryPage()
+	public OrderConfirmationPage gotoOrderConfirmationPage()
 	{
 		placeOrderButton.click();
-		OrderHistoryPage OrderHistoryPage = new OrderHistoryPage(driver);
-		return OrderHistoryPage;
+		OrderConfirmationPage OrderConfirmationPage = new OrderConfirmationPage(driver);
+		return OrderConfirmationPage;
 	}
 	
 	public void SelectCountry()

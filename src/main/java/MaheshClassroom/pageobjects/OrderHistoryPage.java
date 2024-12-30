@@ -1,13 +1,17 @@
 package MaheshClassroom.pageobjects;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import MaheshClassroom.Abstractcomponents.Abstractcomponent;
 
-public class OrderHistoryPage  extends Abstractcomponent
+public class OrderHistoryPage extends Abstractcomponent
 {
 
 	WebDriver driver;
@@ -16,22 +20,17 @@ public class OrderHistoryPage  extends Abstractcomponent
 	{
 		//initialization
 		super(driver);
-		this.driver=driver;
+		this.driver=driver;	
 		PageFactory.initElements(driver, this);
-		
 	}
+
+	@FindBy(css= "tr td:nth-child(3)")
+	private List<WebElement> productNames;
 	
-	By confirmationtextDiv = By.cssSelector("h1.hero-primary");
-	
-	public String GetConfirmationText()
+	public Boolean verifyOrderDisplay(String productName)
 	{
-		String confirmationText = driver.findElement(confirmationtextDiv).getText();
-		return confirmationText;
-	}
-	
-	public void VerifyConfirmationText(String actualText)
-	{
-		Assert.assertTrue(actualText.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
+		Boolean match = productNames.stream().anyMatch(product->product.getText().equalsIgnoreCase(productName));
+		return match;	
 	}
 
 }
