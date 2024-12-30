@@ -55,7 +55,7 @@ public class BaseTest
 		return driver;
 	}
 	
-	@BeforeTest
+	@BeforeTest(alwaysRun=true)
 	public LandingPage launchApplication() throws IOException
 	{
 		driver = initializeDriver();
@@ -65,7 +65,7 @@ public class BaseTest
 		
 	}
 	
-	@AfterTest
+	@AfterTest(alwaysRun=true)
 	public void teardown() 
 	{
 		driver.close();
