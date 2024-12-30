@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import MaheshClassroom.TestComponents.BaseTest;
 import MaheshClassroom.pageobjects.CartPage;
 import MaheshClassroom.pageobjects.LandingPage;
+import MaheshClassroom.pageobjects.OrderConfirmationPage;
 import MaheshClassroom.pageobjects.OrderHistoryPage;
 import MaheshClassroom.pageobjects.PaymentPage;
 import MaheshClassroom.pageobjects.ProductCatalogue;
@@ -19,12 +20,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestLandingPage extends BaseTest{
 
+	String productName = "IPHONE 13 PRO";
+	
 	@Test
 	public void submitOrder() throws InterruptedException, IOException
 	{
-	
-		ProductCatalogue productCataloguePage = landingPage.loginApplication("kafledarkhorse@gmail.com", "@Nepal123");
-		String productName = "IPHONE 13 PRO";
+		ProductCatalogue productCataloguePage = landingPage.loginApplication("kexax37272@nongnue.com", "Kexax37272");
 		productCataloguePage.addProductToCart(productName);	
 		CartPage cartPage = productCataloguePage.goToCartPage();
 		Thread.sleep(2000);
@@ -32,9 +33,17 @@ public class TestLandingPage extends BaseTest{
 		Assert.assertTrue(match);		
 		PaymentPage paymentPage = cartPage.gotoPaymentPage();
 		paymentPage.SelectCountry();
-		OrderHistoryPage orderHistoryPage = paymentPage.gotoOrderHistoryPage();
-		String confirmationText = orderHistoryPage.GetConfirmationText();
-		orderHistoryPage.VerifyConfirmationText(confirmationText);	
+		OrderConfirmationPage OrderConfirmationPage = paymentPage.gotoOrderConfirmationPage();
+		String confirmationText = OrderConfirmationPage.GetConfirmationText();
+		OrderConfirmationPage.VerifyConfirmationText(confirmationText);	
+		driver.findElement(By.cssSelector(".btn-custom .fa-sign-out")).click();
 	}
 		
+	@Test(dependsOnMethods= {"submitOrder"})
+	public void orderHistoryTest() throws InterruptedException, IOException
+	{
+		ProductCatalogue productCataloguePage = landingPage.loginApplication("kexax37272@nongnue.com", "Kexax37272"); //New Credentials kexax37272@nongnue.com //Kexax37272
+		OrderHistoryPage orderHistoryPage = productCataloguePage.goToOrderPage();
+		Assert.assertTrue(orderHistoryPage.verifyOrderDisplay(productName));
+	}
 }
