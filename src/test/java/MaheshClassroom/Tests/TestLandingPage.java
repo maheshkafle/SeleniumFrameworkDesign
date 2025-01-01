@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import MaheshClassroom.TestComponents.BaseTest;
@@ -20,12 +21,12 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestLandingPage extends BaseTest{
 
-	String productName = "IPHONE 13 PRO";
+//	String productName = "IPHONE 13 PRO";
 	
-	@Test
-	public void submitOrder() throws InterruptedException, IOException
+	@Test(dataProvider="getData", groups={"Purchase"})
+	public void submitOrder(String email, String password, String productName) throws InterruptedException, IOException
 	{
-		ProductCatalogue productCataloguePage = landingPage.loginApplication("kexax37272@nongnue.com", "Kexax37272");
+		ProductCatalogue productCataloguePage = landingPage.loginApplication(email, password);
 		productCataloguePage.addProductToCart(productName);	
 		CartPage cartPage = productCataloguePage.goToCartPage();
 		Thread.sleep(2000);
@@ -39,11 +40,17 @@ public class TestLandingPage extends BaseTest{
 		driver.findElement(By.cssSelector(".btn-custom .fa-sign-out")).click();
 	}
 		
-	@Test(dependsOnMethods= {"submitOrder"})
-	public void orderHistoryTest() throws InterruptedException, IOException
+	@Test(dependsOnMethods= {"submitOrder"}, dataProvider="getData")
+	public void orderHistoryTest(String email, String password, String productName) throws InterruptedException, IOException
 	{
-		ProductCatalogue productCataloguePage = landingPage.loginApplication("kexax37272@nongnue.com", "Kexax37272"); //New Credentials kexax37272@nongnue.com //Kexax37272
+		ProductCatalogue productCataloguePage = landingPage.loginApplication(email, password); //New Credentials kexax37272@nongnue.com //Kexax37272
 		OrderHistoryPage orderHistoryPage = productCataloguePage.goToOrderPage();
 		Assert.assertTrue(orderHistoryPage.verifyOrderDisplay(productName));
+	}
+	
+	@DataProvider
+	public Object[][] getData()
+	{
+		return new Object[][] {{"kexax37272@nongnue.com","Kexax37272", "IPHONE 13 PRO"},{"kafledarkhorse@gmail.com", "@Nepal123","ADIDAS ORIGINAL"}};
 	}
 }
