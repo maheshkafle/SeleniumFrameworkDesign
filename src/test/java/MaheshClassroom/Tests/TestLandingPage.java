@@ -3,6 +3,7 @@ package MaheshClassroom.Tests;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -50,17 +51,33 @@ public class TestLandingPage extends BaseTest{
 	}
 	
 	@DataProvider
-	public Object[][] getData()
+	public Object[][] getData() throws IOException
 	{
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", "kexax37272@nongnue.com");
-		map.put("password", "Kexax37272");
-		map.put("product", "IPHONE 13 PRO");
-		
-		HashMap<String, String> map1 = new HashMap<String, String>();
-		map1.put("email", "kafledarkhorse@gmail.com");
-		map1.put("password", "@Nepal123");
-		map1.put("product", "ADIDAS ORIGINAL");
-		return new Object[][] {{map}, {map1}}; 
+		//
+		List<HashMap<String, String>> data = getJSONDataToHashMap(System.getProperty("user.dir")+ "\\src\\test\\java\\MaheshClassroom\\data\\PurchaseOrder.json");
+		return new Object[][] {{data.get(0)}, {data.get(1)}}; 
 	}
+	
+	//Using HashMap
+//	@DataProvider
+//	public Object[][] getData()
+//	{
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("email", "kexax37272@nongnue.com");
+//		map.put("password", "Kexax37272");
+//		map.put("product", "IPHONE 13 PRO");
+//		
+//		HashMap<String, String> map1 = new HashMap<String, String>();
+//		map1.put("email", "kafledarkhorse@gmail.com");
+//		map1.put("password", "@Nepal123");
+//		map1.put("product", "ADIDAS ORIGINAL");
+//		return new Object[][] {{map}, {map1}}; 
+//	}
+	
+	//Using Array
+//	@DataProvider
+//	public Object[][] getData()
+//	{
+//		return new Object[][] {{"kexax37272@nongnue.com", "Kexax37272", "IPHONE 13 PRO"}, {"kafledarkhorse@gmail.com", "@Nepal123", "ADIDAS ORIGINAL"}}; 
+//	}
 }
